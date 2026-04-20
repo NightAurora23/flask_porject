@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Predictor</title>
+    <style>
+        /* CSS Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .prediction-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #764ba2;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .predict-btn {
+            background: #764ba2;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 10px;
+        }
+
+        .predict-btn:hover {
+            background: #5a3a8a;
+            transform: translateY(-2px);
+        }
+
+        #result-container {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            display: none; /* Hidden until "predicted" */
+        }
+
+        .price-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2ecc71;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>House Price Predictor</h1>
+            <p>Enter the details below to estimate the property value.</p>
+        </header>
+        
+        <form class="prediction-form" id="priceForm">
+            <div class="input-group">
+                <label for="area">Total Area (sq ft)</label>
+                <input type="number" id="area" placeholder="e.g. 1500" required>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group" style="flex: 1;">
+                    <label for="bedrooms">Bedrooms</label>
+                    <input type="number" id="bedrooms" min="1" value="2" required>
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label for="bathrooms">Bathrooms</label>
+                    <input type="number" id="bathrooms" min="1" value="2" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="location">Location</label>
+                <select id="location" required>
+                    <option value="" disabled selected>Select neighborhood</option>
+                    <option value="urban">Urban / City Center</option>
+                    <option value="suburban">Suburban</option>
+                    <option value="rural">Rural</option>
+                </select>
+            </div>
+
+            <button type="submit" class="predict-btn">Estimate Price</button>
+        </form>
+
+        <div id="result-container">
+            <h3>Estimated Market Value</h3>
+            <p class="price-display" id="estimatedPrice">$0.00</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple logic to show how the result would appear
+        document.getElementById('priceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('result-container').style.display = 'block';
+            // In a real app, you'd fetch the calculation from a Python model here
+            document.getElementById('estimatedPrice').innerText = "$245,000"; 
+        });
+    </script>
+
+</body>
+</html>
